@@ -2,3 +2,5 @@ node_modules
 dist
 packages
 package-lock.json
+.idea
+.idea/vcs.xml
