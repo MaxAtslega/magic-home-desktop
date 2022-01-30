@@ -1,24 +1,24 @@
 /* eslint-disable no-useless-constructor */
-import React, { Component } from 'react'
-import { Container, Title, AddButton } from './Header.styles'
-import { GrAdd } from 'react-icons/gr'
-
+import React, { Component } from 'react';
+import { Container, Title } from './Header.styled';
 interface Props {
   title: string;
-  addButton?: any;
+  addButton?: boolean;
+  children?: any;
 }
 
 export default class App extends Component<Props> {
-  constructor (props: Props) {
-    super(props)
+  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
+  constructor(props: Props) {
+    super(props);
   }
 
-  render () {
+  render() {
     return (
       <Container>
         <Title>{this.props.title}</Title>
-        {this.props.addButton ? <AddButton onClick={this.props.addButton}><GrAdd/></AddButton> : null}
+        {this.props.children ? this.props.children : null}
       </Container>
-    )
+    );
   }
 }

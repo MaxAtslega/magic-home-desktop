@@ -1,42 +1,49 @@
-import React, { Component } from 'react'
-import { render } from 'react-dom'
-import { GlobalStyle } from './styles/GlobalStyle'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import { GlobalStyle } from './styles/GlobalStyle';
+import {
+  Routes,
+  Route,
+  BrowserRouter as Router,
+  Navigate,
+} from 'react-router-dom';
 
 // Components
-import TitleBar from './components/Titlebar'
-import Sidebar from './components/Sidebar'
-import Main from './components/Main'
-
-// Routes
-import Devices from './routes/Devices'
-import Groups from './routes/Groups'
-import Device from './routes/Device'
-import Information from './routes/Information'
+import TitleBar from './components/Titlebar';
+import Sidebar from './components/Sidebar';
+import Main from './components/Main';
+import Devices from './routes/Devices';
+import Settings from './routes/Settings';
+import AllDevices from './routes/AllDevices/index';
+import AddDevice from './routes/AddDevice';
+import Information from "./routes/Information";
+import Device from "./routes/Device";
 
 export default class App extends Component {
-  render () {
+  render() {
     return (
-      <BrowserRouter>
+      <Router>
         <GlobalStyle />
-        <TitleBar backgroundColor={'#1F9DDA'} title="Magic-Home Desktop"/>
-        <Sidebar/>
+        <TitleBar backgroundColor={'#1F9DDA'} title="Magic-Home Desktop" />
+        <Sidebar />
         <Main>
-          <Switch>
-            <Route exact path="/devices" component={Devices}/>
-            <Route exact path="/groups" component={Groups}/>
-            <Route exact path="/information" component={Information}/>
-            <Route exact path="/device/:id" component={Device}/>
-            <Redirect from='/' to="/devices" />
-          </Switch>
+          <Routes>
+            <Route path="/device" element={<Device />} />
+            <Route path="/devices" element={<Devices />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/information" element={<Information />} />
+            <Route path="/add-device" element={<AddDevice />} />
+            <Route path="/add" element={<AllDevices />} />
+            <Route path="*" element={<Navigate to={'/devices'} />} />
+          </Routes>
         </Main>
-      </BrowserRouter>
-    )
+      </Router>
+    );
   }
 }
 
-const mainElement = document.createElement('div')
-mainElement.setAttribute('id', 'root')
-document.body.appendChild(mainElement)
+const mainElement = document.createElement('div');
+mainElement.setAttribute('id', 'root');
+document.body.appendChild(mainElement);
 
-render(<App />, mainElement)
+render(<App />, mainElement);

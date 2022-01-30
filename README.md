@@ -1,2 +1,1 @@
-# Magic-Home Desktop
-ToDo
+# magic-home-twitch
